@@ -9,24 +9,26 @@ public static class TelemetryInjector
     public static IServiceCollection AddTelemetry(this IServiceCollection services, IConfiguration configuration)
     {
         var applicationName = "demo-api";
-        var tracingOtlpEndpoint = configuration["OTLP_ENDPOINT_URL"];
+
+        var otlpEndpoint = configuration["OTLP_ENDPOINT_URL"]!;
+
+        if (string.IsNullOrEmpty(otlpEndpoint)) return services;
+
         var otel = services.AddOpenTelemetry();
 
         otel.ConfigureResource(resource => resource
-            .AddService(serviceName: applicationName));
+            .AddService(serviceName: applicationName)
+            .AddTelemetrySdk());
 
         otel.WithMetrics(metrics => metrics
-            .AddAspNetCoreInstrumentation()
-            .AddMeter("Microsoft.AspNetCore.Hosting")
-            .AddMeter("Microsoft.AspNetCore.Server.Kestrel")
-            .AddMeter("System.Net.Http")
-            .AddMeter("System.Net.NameResolution"));
+                .AddAspNetCoreInstrumentation()
+                .AddHttpClientInstrumentation()
+                .AddRuntimeInstrumentation()
+                .AddOtlpExporter(opt => opt.Endpoint = new Uri(otlpEndpoint)));
 
-        otel.WithTracing(tracing =>
-        {
-            tracing.AddAspNetCoreInstrumentation();
-            tracing.AddConsoleExporter();
-        });
+        otel.WithTracing(tracing => tracing
+                .AddAspNetCoreInstrumentation()
+                .AddOtlpExporter(opt => opt.Endpoint = new Uri(otlpEndpoint)));
 
         return services;
     }

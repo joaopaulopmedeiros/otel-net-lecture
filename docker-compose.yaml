@@ -4,8 +4,15 @@ services:
     build:
       context: .
       dockerfile: src/Demo.Api/Dockerfile
+      args:
+        - configuration=Debug
     ports:
       - 5252:5252
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - OTLP_ENDPOINT_URL=http://otel-collector:4317
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
 
   otel-collector:
     image: otel/opentelemetry-collector:0.111.0

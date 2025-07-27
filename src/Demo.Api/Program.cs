@@ -1,5 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddTelemetry(builder.Configuration);
 builder.Services.AddValidators();
 builder.Services.AddDocumentation();
 

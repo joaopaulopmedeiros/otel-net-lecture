@@ -6,6 +6,6 @@ public class OrderPostRequestValidator : AbstractValidator<OrderPostRequest>
     {
         RuleFor(x => x.Price)
                         .GreaterThanOrEqualTo(0)
-                        .WithMessage("O preço não pode ser negativo");
+                        .WithMessage("Price must not be negative");
     }
 }

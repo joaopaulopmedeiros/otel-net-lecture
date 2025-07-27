@@ -4,7 +4,7 @@ public static class PostEndpoint
 {
     public static IEndpointRouteBuilder MapOrderPostEndpoint(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/v1/Orders/Post", async (
+        endpoints.MapPost("/v1/orders", async (
             OrderPostRequest request,
             [FromServices] IValidator<OrderPostRequest> validator
         ) =>

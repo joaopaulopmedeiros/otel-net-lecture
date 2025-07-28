@@ -1,6 +1,7 @@
+global using Demo.Api.Documentation.Extensions;
 global using Demo.Api.Endpoints.Orders.Post;
-global using Demo.Api.Extensions;
-global using Demo.Api.Metrics;
+global using Demo.Api.Telemetry.Extensions;
+global using Demo.Api.Telemetry.Metrics;
 
 global using FluentValidation;
 global using FluentValidation.Results;

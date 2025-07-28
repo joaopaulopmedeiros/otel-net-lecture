@@ -1,6 +1,6 @@
 using System.Diagnostics.Metrics;
 
-namespace Demo.Api.Metrics;
+namespace Demo.Api.Telemetry.Metrics;
 
 public class OrderMetrics
 {

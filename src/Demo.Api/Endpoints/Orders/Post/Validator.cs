@@ -9,3 +9,12 @@ public class OrderPostRequestValidator : AbstractValidator<OrderPostRequest>
                         .WithMessage("Price must not be negative");
     }
 }
+
+public static class OrderPostRequestValidatorExtensions
+{
+    public static IServiceCollection AddValidators(this IServiceCollection services)
+    {
+        services.AddScoped<IValidator<OrderPostRequest>, OrderPostRequestValidator>();
+        return services;
+    }
+}

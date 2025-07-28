@@ -1,4 +1,4 @@
-namespace Demo.Api.Extensions;
+namespace Demo.Api.Documentation.Extensions;
 
 public static class DocumentationExtensions
 {

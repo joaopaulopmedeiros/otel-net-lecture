@@ -1,11 +1,13 @@
 using System.Diagnostics.Metrics;
 
+using Demo.Api.Telemetry.Metrics;
+
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace Demo.Api.Extensions;
+namespace Demo.Api.Telemetry.Extensions;
 
 public static class TelemetryExtensions
 {

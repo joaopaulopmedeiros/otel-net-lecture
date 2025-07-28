@@ -1,6 +1,6 @@
 namespace Demo.Api.Endpoints.Orders.Post;
 
-public static class PostEndpoint
+public static class Endpoint
 {
     public static IEndpointRouteBuilder MapOrderPostEndpoint(this IEndpointRouteBuilder endpoints)
     {

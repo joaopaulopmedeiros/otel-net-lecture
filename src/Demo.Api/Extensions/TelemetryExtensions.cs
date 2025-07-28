@@ -1,3 +1,5 @@
+using System.Diagnostics.Metrics;
+
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -15,6 +17,10 @@ public static class TelemetryExtensions
 
         if (string.IsNullOrEmpty(otlpEndpoint)) return services;
 
+        var meter = new Meter(OrderMetrics.Name, OrderMetrics.Version);
+        services.AddSingleton(meter);
+        services.AddSingleton<OrderMetrics>();
+
         var otel = services.AddOpenTelemetry();
 
         otel.ConfigureResource(resource => resource
@@ -25,6 +31,7 @@ public static class TelemetryExtensions
                 .AddAspNetCoreInstrumentation()
                 .AddHttpClientInstrumentation()
                 .AddRuntimeInstrumentation()
+                .AddMeter(OrderMetrics.Name)
                 .AddOtlpExporter(opt => opt.Endpoint = new Uri(otlpEndpoint))
                 .AddConsoleExporter());
 

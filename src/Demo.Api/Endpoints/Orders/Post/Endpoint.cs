@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Demo.Api.Endpoints.Orders.Post;
 
 public static class Endpoint
@@ -8,7 +6,8 @@ public static class Endpoint
     {
         endpoints.MapPost("/v1/orders", async (
             OrderPostRequest request,
-            [FromServices] IValidator<OrderPostRequest> validator
+            [FromServices] IValidator<OrderPostRequest> validator,
+            [FromServices] OrderMetrics metrics
         ) =>
         {
             ValidationResult validation = await validator.ValidateAsync(request);
@@ -24,6 +23,8 @@ public static class Endpoint
             await Task.Delay(100); //todo: enqueue message
 
             Activity.Current?.SetTag("order.id", orderId);
+
+            metrics.RecordOrderAccepted();
 
             return Results.Accepted(string.Empty, new OrderPostResponse(orderId));
         })

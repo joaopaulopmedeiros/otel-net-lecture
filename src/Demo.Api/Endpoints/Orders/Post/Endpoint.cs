@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Demo.Api.Endpoints.Orders.Post;
 
 public static class Endpoint
@@ -20,6 +22,8 @@ public static class Endpoint
             Guid orderId = Guid.NewGuid();
 
             await Task.Delay(100); //todo: enqueue message
+
+            Activity.Current?.SetTag("order.id", orderId);
 
             return Results.Accepted(string.Empty, new OrderPostResponse(orderId));
         })

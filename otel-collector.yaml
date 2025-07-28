@@ -14,6 +14,8 @@ exporters:
     send_timestamps: true
     metric_expiration: 180m
     enable_open_metrics: true
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
   otlp:
     endpoint: tempo:4317
     tls:
@@ -29,4 +31,4 @@ service:
       exporters: [debug, prometheus]
     logs:
       receivers: [otlp]
-      exporters: [debug]
+      exporters: [debug, loki]

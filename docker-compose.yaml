@@ -15,7 +15,7 @@ services:
       - ~/.vsdbg:/remote_debugger:rw
 
   otel-collector:
-    image: otel/opentelemetry-collector:0.111.0
+    image: otel/opentelemetry-collector-contrib:0.111.0
     command: [ "--config=/etc/otel-collector.yaml" ]
     volumes:
       - ./otel-collector.yaml:/etc/otel-collector.yaml
@@ -45,6 +45,12 @@ services:
       - ./prometheus.yaml:/etc/prometheus.yaml
     ports:
       - "9090:9090"
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml      
 
   grafana:
     image: grafana/grafana:9.3.2

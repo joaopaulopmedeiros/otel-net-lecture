@@ -1,3 +1,4 @@
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -28,6 +29,9 @@ public static class TelemetryExtensions
 
         otel.WithTracing(tracing => tracing
                 .AddAspNetCoreInstrumentation()
+                .AddOtlpExporter(opt => opt.Endpoint = new Uri(otlpEndpoint)));
+
+        otel.WithLogging(logging => logging
                 .AddOtlpExporter(opt => opt.Endpoint = new Uri(otlpEndpoint)));
 
         return services;

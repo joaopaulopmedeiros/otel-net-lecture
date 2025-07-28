@@ -14,5 +14,5 @@ up: ## Setup containers
 .PHONY: up
 
 down: ## Stop containers
-	$(DOCKER_COMPOSE_CMD) down
+	$(DOCKER_COMPOSE_CMD) down --rmi all
 .PHONY: down

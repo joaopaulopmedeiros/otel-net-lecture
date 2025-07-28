@@ -1,4 +1,4 @@
-# OpenTelemetry Demo (.NET)
+# OpenTelemetry .NET
 
 Hands-on demo project for .NET developers exploring [OpenTelemetry](https://opentelemetry.io/), presented during my lecture at **WTADS/WINFO**.
 
@@ -51,3 +51,6 @@ To stop all containers, remove volumes and orphans:
 ```
 make down
 ```
+
+### Presentation
+Complementary slides are available in PDF format [here](./docs/presentation.pdf)

@@ -1,5 +1,5 @@
 global using Demo.Api.Endpoints.Orders.Post;
-global using Demo.Api.IoC;
+global using Demo.Api.Extensions;
 
 global using FluentValidation;
 global using FluentValidation.Results;

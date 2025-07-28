@@ -1,6 +1,6 @@
-namespace Demo.Api.IoC;
+namespace Demo.Api.Extensions;
 
-public static class ScalarInjector
+public static class DocumentationExtensions
 {
     public static IServiceCollection AddDocumentation(this IServiceCollection services)
     {

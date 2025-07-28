@@ -1,6 +1,6 @@
-namespace Demo.Api.IoC;
+namespace Demo.Api.Extensions;
 
-public static class ValidatorInjector
+public static class ValidationExtensions
 {
     public static IServiceCollection AddValidators(this IServiceCollection services)
     {

@@ -2,9 +2,9 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace Demo.Api.IoC;
+namespace Demo.Api.Extensions;
 
-public static class TelemetryInjector
+public static class TelemetryExtensions
 {
     public static IServiceCollection AddTelemetry(this IServiceCollection services, IConfiguration configuration)
     {

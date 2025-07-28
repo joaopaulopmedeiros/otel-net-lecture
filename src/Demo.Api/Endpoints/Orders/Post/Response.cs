@@ -1,3 +1,3 @@
 namespace Demo.Api.Endpoints.Orders.Post;
 
-public record OrderPostResponse(Guid OrderId);
+public readonly record struct OrderPostResponse(Guid OrderId);

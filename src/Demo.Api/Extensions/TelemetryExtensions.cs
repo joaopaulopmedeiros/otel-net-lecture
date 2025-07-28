@@ -11,20 +11,16 @@ public static class TelemetryExtensions
 {
     public static IServiceCollection AddTelemetry(this IServiceCollection services, IConfiguration configuration)
     {
-        var applicationName = "demo-api";
+        var serviceName = configuration["SERVICE_NAME"]!;
 
         var otlpEndpoint = configuration["OTLP_ENDPOINT_URL"]!;
 
-        if (string.IsNullOrEmpty(otlpEndpoint)) return services;
-
-        var meter = new Meter(OrderMetrics.Name, OrderMetrics.Version);
-        services.AddSingleton(meter);
-        services.AddSingleton<OrderMetrics>();
+        services.AddMetrics();
 
         var otel = services.AddOpenTelemetry();
 
         otel.ConfigureResource(resource => resource
-            .AddService(serviceName: applicationName)
+            .AddService(serviceName: serviceName)
             .AddTelemetrySdk());
 
         otel.WithMetrics(metrics => metrics
@@ -43,6 +39,16 @@ public static class TelemetryExtensions
         otel.WithLogging(logging => logging
                 .AddOtlpExporter(opt => opt.Endpoint = new Uri(otlpEndpoint))
                 .AddConsoleExporter());
+
+        return services;
+    }
+
+    public static IServiceCollection AddMetrics(this IServiceCollection services)
+    {
+        var meter = new Meter(OrderMetrics.Name, OrderMetrics.Version);
+
+        services.AddSingleton(meter);
+        services.AddSingleton<OrderMetrics>();
 
         return services;
     }

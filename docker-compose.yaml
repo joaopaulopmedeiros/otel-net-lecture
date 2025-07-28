@@ -11,7 +11,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - OTLP_ENDPOINT_URL=http://otel-collector:4317
-      - OTLP_CONSOLE_ENABLED=false
+      - SERVICE_NAME=demo-api
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
 

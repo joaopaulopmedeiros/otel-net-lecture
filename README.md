@@ -1,2 +1,2 @@
 # OpenTelemetry
-Hands-on demo project for .NET developers getting started with OTEL.
+Sample hands-on project for .NET developers exploring OpenTelemetry, presented during my lecture at WTADS/WINFO.

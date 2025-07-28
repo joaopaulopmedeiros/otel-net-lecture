@@ -31,3 +31,20 @@ datasources:
     httpMethod: GET
     serviceMap:
       datasourceUid: prometheus
+
+- name: Loki
+  type: loki
+  access: proxy
+  orgId: 1
+  url: http://loki:3100
+  basicAuth: false
+  isDefault: false
+  version: 1
+  editable: false
+  uid: loki
+  jsonData:
+    derivedFields:
+      - name: trace_id
+        matcherRegex: '"traceId":"(\w+)"'
+        url: '$${__value.raw}'
+        datasourceUid: tempo      
